@@ -1,7 +1,8 @@
 package main
 
-import "fmt"
+import "github.com/gin-gonic/gin"
 
 func main() {
-	fmt.Println("Authen demo")
+	router := gin.Default()
+	router.Run(":8081")
 }
