@@ -1,7 +1,12 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"main/db"
+
+	"github.com/gin-gonic/gin"
+)
 
 func Setup(router *gin.Engine) {
+	db.SetupDB()
 	SetAuthenAPI(router)
 }
