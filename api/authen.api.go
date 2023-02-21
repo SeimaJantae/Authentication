@@ -1,6 +1,10 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"main/model"
+
+	"github.com/gin-gonic/gin"
+)
 
 func SetAuthenAPI(router *gin.Engine) {
 	authenAPI := router.Group("/api/v1")
@@ -15,5 +19,9 @@ func login(c *gin.Context) {
 }
 
 func register(c *gin.Context) {
-	c.JSON(200, gin.H{"result": "register OK"})
+	var user model.User
+	if c.ShouldBind(&user) == nil {
+
+		c.JSON(200, gin.H{"result": "register OK", "data": user})
+	}
 }
