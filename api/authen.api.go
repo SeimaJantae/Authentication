@@ -1,7 +1,9 @@
 package api
 
 import (
+	"main/db"
 	"main/model"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,7 +23,16 @@ func login(c *gin.Context) {
 func register(c *gin.Context) {
 	var user model.User
 	if c.ShouldBind(&user) == nil {
+		user.CreatedAt = time.Now()
+		if err := db.GetDB().Create(&user).Error; err == nil {
 
-		c.JSON(200, gin.H{"result": "register OK", "data": user})
+			c.JSON(200, gin.H{"result": "register OK", "data": user})
+		} else {
+			c.JSON(200, gin.H{"result": "register Not OK", "error": err})
+
+		}
+
+	} else {
+		c.JSON(401, gin.H{"result": "Can not bind data"})
 	}
 }

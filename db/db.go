@@ -21,7 +21,7 @@ func SetupDB() {
 		panic("failed to connect database")
 	}
 
-	// Migrate the schema
+	// Migrate the schema: Create user data database
 	db.AutoMigrate(&model.User{})
 
 	// Assign database
