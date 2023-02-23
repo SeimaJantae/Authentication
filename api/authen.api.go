@@ -5,6 +5,8 @@ import (
 	"main/model"
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,6 +25,7 @@ func login(c *gin.Context) {
 func register(c *gin.Context) {
 	var user model.User
 	if c.ShouldBind(&user) == nil {
+		user.Password, _ = hasPassword(user.Password)
 		user.CreatedAt = time.Now()
 		if err := db.GetDB().Create(&user).Error; err == nil {
 
@@ -35,4 +38,9 @@ func register(c *gin.Context) {
 	} else {
 		c.JSON(401, gin.H{"result": "Can not bind data"})
 	}
+}
+
+func hasPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }
