@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/gin-gonic/gin v1.8.2
+	github.com/golang-jwt/jwt/v5 v5.0.0-rc.1
 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
 	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.5
