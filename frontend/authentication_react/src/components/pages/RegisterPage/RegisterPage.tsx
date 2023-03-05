@@ -2,27 +2,24 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
-  CardMedia,
-  FormControl,
-  FormLabel,
   Grid,
-  Input,
+  Link,
   TextField,
   Typography,
 } from "@mui/material";
 import { Formik, FormikProps } from "formik";
 import * as React from "react";
+import { User } from "../../../types/user.type";
 
 type RegisterPageProps = {
   //
 };
 
-const RegisterForm = (props: FormikProps<any>) => {
+const RegisterForm = (props: FormikProps<User>) => {
   return (
     <Card sx={{ maxWidth: 450, mx: "auto", my: "2rem" }}>
-      <CardContent>
+      <CardContent sx={{ p: "2rem" }}>
         <Typography variant="h5" gutterBottom>
           Create Account
         </Typography>
@@ -66,8 +63,13 @@ const RegisterForm = (props: FormikProps<any>) => {
                 size="large"
                 disabled={props.isSubmitting}
               >
-                SIGN UP
+                Create your account
               </Button>
+            </Grid>
+            <Grid xs={12} item>
+              <Link href="/login" variant="body2">
+                {"Have an account already? Log in"}
+              </Link>
             </Grid>
           </Grid>
         </form>
@@ -75,6 +77,8 @@ const RegisterForm = (props: FormikProps<any>) => {
     </Card>
   );
 };
+const initialValues: User = { username: "", password: "" };
+
 const RegisterPage: React.FC<any> = () => {
   return (
     <>
@@ -85,7 +89,7 @@ const RegisterPage: React.FC<any> = () => {
             setSubmitting(false);
           }, 2000);
         }}
-        initialValues={{ username: "", password: "" }}
+        initialValues={initialValues}
       >
         {(props) => RegisterForm(props)}
       </Formik>
