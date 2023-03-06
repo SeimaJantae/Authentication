@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="inherit" variant="outlined">
+      <AppBar position="static" color="inherit">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Authentication App

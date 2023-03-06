@@ -10,7 +10,9 @@ import {
 } from "@mui/material";
 import { Formik, FormikProps } from "formik";
 import * as React from "react";
+import { server } from "../../../Constants";
 import { User } from "../../../types/user.type";
+import { httpClient } from "../../../utils/httpclient";
 
 type RegisterPageProps = {
   //
@@ -83,8 +85,11 @@ const RegisterPage: React.FC<any> = () => {
   return (
     <>
       <Formik
-        onSubmit={(values, { setSubmitting }) => {
-          alert(JSON.stringify(values));
+        onSubmit={async (values, { setSubmitting }) => {
+          const result = await httpClient.post(server.REGISTER_URL, values);
+
+          alert(JSON.stringify(result.data));
+
           setTimeout(() => {
             setSubmitting(false);
           }, 2000);
